@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Medicine Expiry Alert</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 320px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      color: #555;
+      display: block;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="button"] {
+      padding: 10px;
+      margin-bottom: 20px;
+      width: calc(100% - 20px);
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="button"] {
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script>
+    function checkExpiry() {
+      var medicineName = document.getElementById('medicineName').value;
+      var expiryDate = new Date(document.getElementById('expiryDate').value);
+      var today = new Date();
+
+      if (expiryDate > today) {
+        var timeDiff = expiryDate.getTime() - today.getTime();
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        alert(medicineName + ' will expire in ' + diffDays + ' days.');
+      } else {
+        alert(medicineName + ' has already expired.');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Medicine Expiry Alert</h1>
+    <form>
+      <label for="medicineName">Medicine Name:</label>
+      <input type="text" id="medicineName" name="medicineName" required><br>
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="date" id="expiryDate" name="expiryDate" required><br>
+      <input type="button" value="Check Expiry" onclick="checkExpiry()">
+    </form>
+  </div>
+</body>
+</html>
